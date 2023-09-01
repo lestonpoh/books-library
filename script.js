@@ -45,14 +45,22 @@ function createCard(book){
     title.textContent = book.title;
     author.textContent = book.author;
     pages.textContent = book.pages;
-    read.textContent = book.read;
+    read.textContent = book.read === true ? "Read": "Not Read";
 
 }
 
+
 myLibrary.forEach((book) => {
     createCard(book)
-    
-
-
-    
 });
+
+const form = document.querySelector("form");
+const submit = document.querySelector("#submit")
+submit.addEventListener("click",(e)=>{
+    e.preventDefault();
+    let title = document.querySelector("#title").value;
+    let author = document.querySelector("#author").value;
+    let pages = document.querySelector("#pages").value;
+    let read = document.querySelector("#read");
+    console.log(read.checked)
+})
