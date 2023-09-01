@@ -1,0 +1,38 @@
+:root{
+
+}
+
+html,body{
+    margin:0;
+}
+
+.header{
+    background-color:#e3f6f5;
+    font-size: 2rem;
+    font-weight: bold;
+    box-shadow: 0px 1px 4px rgb(0,0,0,0.5);
+    padding:2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.header p{
+    margin:0
+}
+
+.content{
+    background-color:#ffffff;
+    padding:2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+    gap: 2rem;
+    justify-items: center;
+}
+
+.content .card{
+    background-color: #bae8e8;
+    border-radius: 10px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0px 1px 4px rgb(0,0,0,0.5);
+}
