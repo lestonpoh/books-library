@@ -32,7 +32,7 @@ function createCard(book,index){
     const title = document.createElement("p");
     const author = document.createElement("p");
     const pages = document.createElement("p");
-    const read = document.createElement("p");
+    const read = document.createElement("button");
     const remove = document.createElement("button")
 
     card.classList.add("card")
@@ -48,14 +48,17 @@ function createCard(book,index){
     title.textContent = book.title;
     author.textContent = book.author;
     pages.textContent = book.pages;
-    read.textContent = book.read === true ? "Read": "Not Read";
-    remove.classList.add("remove");
+    
+    read.textContent = book.read ? "Read" : "Not Read";
+    read.classList.add("read-button")
+    book.read ? read.classList.add("read") : read.classList.add("not-read")
+    
+    remove.classList.add("remove-button");
     remove.textContent = "Remove"
 }
 
 function removeBook(index){
     myLibrary.splice(index,1)
-
 }
 
 function displayBooks(){
@@ -64,26 +67,22 @@ function displayBooks(){
         createCard(book,index)
     });
     
-    const removeButtons = document.querySelectorAll(".remove");
+    const removeButtons = document.querySelectorAll(".remove-button");
     removeButtons.forEach((removeButton)=>{
         removeButton.addEventListener("click",(e)=>{
-            console.log(e.target.parentElement.id)
             removeBook(e.target.parentElement.id)
-            console.log(myLibrary)
+            displayBooks()
+        })
+    })
+
+    const readButtons = document.querySelectorAll(".read-button");
+    readButtons.forEach((readButton)=>{
+        readButton.addEventListener("click",(e)=>{
+            myLibrary[e.target.parentElement.id].read = !myLibrary[e.target.parentElement.id].read
             displayBooks()
         })
     })
 }
-
-function resetPopup(title,author,pages,read){
-    title="";
-    console.log(title.value)
-    author="";
-    pages="";
-    read = false
-}
-
-
 
 // first display
 displayBooks()
@@ -102,17 +101,18 @@ closePopupButton.addEventListener("click",(e)=>{
     form.reset();
 })
 
+// pressing submit button on form
 const form = document.querySelector("form");
 form.addEventListener("submit",(e)=>{
     e.preventDefault();
-    let title = document.querySelector("#title").value;
-    let author = document.querySelector("#author").value;
-    let pages = document.querySelector("#pages").value;
-    let read = document.querySelector("#read").checked;
+    let titleForm = document.querySelector("#title").value;
+    let authorForm = document.querySelector("#author").value;
+    let pagesForm = document.querySelector("#pages").value;
+    let readForm = document.querySelector("#read").checked;
     
     let bookExist=false;
     myLibrary.forEach((book)=>{
-        if (title.toLowerCase() === book.title.toLowerCase()){
+        if (titleForm.toLowerCase() === book.title.toLowerCase()){
             alert("This book has already been added!");
             bookExist=true;
             return;
@@ -121,12 +121,10 @@ form.addEventListener("submit",(e)=>{
     if (bookExist) {return};
 
 
-    newBook = new Book(title,author,pages,read);
+    newBook = new Book(titleForm,authorForm,pagesForm,readForm);
     addBookToLibrary(newBook);
     displayBooks();
     form.reset();
-    
-    console.log("ewdd"+title)
     popup.classList.remove("open-pop-up");
 })
 

@@ -8,6 +8,10 @@ html,body{
     background-color:#F8F8F8
 }
 
+button:active{
+    transform:scale(0.98)
+}
+
 .header{
     background-color:#e3f6f5;
     font-size: 2rem;
@@ -42,15 +46,12 @@ html,body{
     justify-self: center;
 }
 
-#add-book:active{
-    transform: scale(0.98);
-}
 
 .books-content{
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+    grid-template-columns: repeat(auto-fit,minmax(300px,30%));
     gap: 2rem;
-    justify-items: center;
+    justify-content: center;
 }
 
 .card{
@@ -58,22 +59,42 @@ html,body{
     background-color: #bae8e8;
     border-radius: 10px;
     width: 100%;
-    text-align: center;
+    display: grid;
+    justify-items: center;
     box-shadow: 0px 1px 4px rgb(0,0,0,0.5);
-    padding:1rem
+    padding:1rem 2rem
+}
+.card *{
+    margin:0.5rem
 }
 
-.card button{
+.remove-button{
+    width:100%;
     border:none;
     padding:1rem 1.5rem;
     border-radius: 10px;
     background-color: #403e52;
     color:white;
     font-weight: bold;
+    
 }
 
-.card button:active{
-    transform:scale(0.98)
+
+.read-button{
+    width:100%;
+    border:none;
+    padding:1rem 1.5rem;
+    border-radius: 10px;
+    color:black;
+    font-weight: bold;
+}
+
+.read{
+    background-color: #c2fcd9;
+}
+
+.not-read{
+    background-color: #fa7f7f;
 }
 
 .pop-up{
@@ -132,7 +153,4 @@ html,body{
     border-radius: 5px;
     background-color: #403e52;
     padding: 0.5rem 1rem
-}
-.pop-up button:active{
-    transform: scale(0.98);
 }
