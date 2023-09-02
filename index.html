@@ -12,7 +12,8 @@
         <p>LIBRARY</p>
     </div>
     <div class="content">
-        <button>Add Book</button>
+        <button id="add-book">Add Book</button>
+        <div class="books-content"></div>
     </div>
     <div class="pop-up">
         <form action="">
@@ -25,10 +26,15 @@
             <label for="pages">Number of pages</label>
             <input type="number" name="pages" id="pages" required>
 
-            <label for="read">Have you read it?</label>
-            <input type="checkbox" name="read" id="read" value="true" required>
-
-            <button  id="submit">Submit</button>
+            <label for="read">Have you read it?
+                <input type="checkbox" name="read" id="read" value="true" required>
+            </label>
+            
+            <div class="buttons">
+                <button id="close">Close</button>
+                <button  id="submit">Submit</button>
+            </div>
+            
             
         </form>
     </div>

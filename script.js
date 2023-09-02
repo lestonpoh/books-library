@@ -21,11 +21,11 @@ function Book(title,author,pages,read) {
     this.read = read;
 }
 
-function addBookToLibrary() {
-  // do stuff here
+function addBookToLibrary(newBook) {
+  myLibrary.push(newBook)
 }
 
-const content = document.querySelector(".content")
+const booksContent = document.querySelector(".books-content")
 
 function createCard(book){
     const card = document.createElement("div");
@@ -36,7 +36,7 @@ function createCard(book){
 
     card.classList.add("card")
 
-    content.appendChild(card);
+    booksContent.appendChild(card);
     card.appendChild(title);
     card.appendChild(author);
     card.appendChild(pages);
@@ -61,6 +61,32 @@ submit.addEventListener("click",(e)=>{
     let title = document.querySelector("#title").value;
     let author = document.querySelector("#author").value;
     let pages = document.querySelector("#pages").value;
-    let read = document.querySelector("#read");
-    console.log(read.checked)
+    let read = document.querySelector("#read").checked;
+    
+    let bookExist=false;
+    myLibrary.forEach((book)=>{
+        if (title.toLowerCase() === book.title.toLowerCase()){
+            alert("This book has already been added!");
+            bookExist=true;
+            return;
+        }
+    })
+    if (bookExist) {return};
+    newBook = new Book(title,author,pages,read);
+    addBookToLibrary(newBook);
+    booksContent.innerHTML="";
+    myLibrary.forEach((book) => {
+        createCard(book);
+    });
+})
+
+const addBookButton = document.querySelector("#add-book");
+const popup = document.querySelector(".pop-up");
+addBookButton.addEventListener("click",(e)=>{
+    popup.classList.add("open-pop-up")
+})
+
+const closePopupButton = document.querySelector("#close");
+closePopupButton.addEventListener("click",(e)=>{
+    popup.classList.remove("open-pop-up")
 })

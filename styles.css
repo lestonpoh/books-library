@@ -5,6 +5,7 @@
 html,body{
     margin:0;
     position: relative;
+    background-color:#F8F8F8
 }
 
 .header{
@@ -22,33 +23,37 @@ html,body{
 }
 
 .content{
-    background-color:#ffffff;
     padding:2rem;
+    display: grid;
+}
+
+#add-book{
+    text-decoration: none;
+    border:none;
+    background-color: #403e52;
+    width:50%;
+    padding: 1rem 2rem; 
+    margin-bottom: 2rem;
+    color:white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 10px;
+    box-shadow: 0px 1px 4px rgb(0,0,0,0.5);
+    justify-self: center;
+}
+
+#add-book:active{
+    transform: scale(0.98);
+}
+
+.books-content{
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
     gap: 2rem;
     justify-items: center;
 }
 
-.content button{
-    grid-column: 1/-1;
-    text-decoration: none;
-    border:none;
-    background-color: #403e52;
-    width:50%;
-    padding: 1rem 2rem; 
-    color:white;
-    font-size: 1.5rem;
-    font-weight: bold;
-    border-radius: 10px;
-    box-shadow: 0px 1px 4px rgb(0,0,0,0.5);
-}
-
-.content button:active{
-    transform: scale(0.98);
-}
-
-.content .card{
+.card{
     background-color: #bae8e8;
     border-radius: 10px;
     width: 100%;
@@ -57,6 +62,7 @@ html,body{
 }
 
 .pop-up{
+    visibility: hidden;
     position: absolute;
     box-shadow: 0px 1px 4px rgb(0,0,0,0.5);
     border-radius: 10px;
@@ -67,20 +73,39 @@ html,body{
     transform: translate(-50%, -50%);
 }
 
+.open-pop-up{
+    visibility: visible;
+}
+
 .pop-up label, .pop-up input, .pop-up button{
     display:block
 }
 
-.pop-up label[for=read], .pop-up input[id=read]{
-    display:inline-block;
-    vertical-align: middle;
+.pop-up label[for=read]{
+    display:grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    justify-items: end;
 }
 
 .pop-up input{
     border: none;
     border-radius: 5px;
     padding:0.3rem 0.8rem;
-    margin: 0.3rem 0;
+    margin: 0.3rem 0 0.3rem 0;
+    width:100%;
+    box-sizing: border-box
+}
+.pop-up input[id=read]{
+
+    width: 1rem;
+    height:1rem;
+}
+
+.buttons{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:1rem;
 }
 
 .pop-up button{
@@ -88,7 +113,6 @@ html,body{
     font-size: 1.2rem;
     font-weight: bold;
     margin-top: 1rem;
-    width: 100%;
     border:none;
     border-radius: 5px;
     background-color: #403e52;
