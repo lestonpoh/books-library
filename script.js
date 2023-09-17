@@ -101,31 +101,108 @@ closePopupButton.addEventListener("click",(e)=>{
     form.reset();
 })
 
+const title = document.querySelector("#title");
+const titleError = title.nextElementSibling;
+
+const author = document.querySelector("#author");
+const authorError = author.nextElementSibling;
+
+const pages = document.querySelector("#pages");
+const pagesError = pages.nextElementSibling;
+
+const read = document.querySelector("#read");
+
+
+title.addEventListener("input",()=>{
+    const isValid = title.value.length > 0;
+    if (isValid) {
+        title.className = "";
+        titleError.textContent = "";
+        titleError.className = "error"
+    } 
+})
+
+author.addEventListener("input",()=>{
+    const isValid = author.value.length > 0;
+    if (isValid) {
+        author.className = "";
+        authorError.textContent = "";
+        authorError.className = "error"
+    }
+})
+
+pages.addEventListener("input",()=>{
+    const isValid = Number.isInteger(+pages.value)
+    if (isValid) {
+        pages.className = "";
+        pagesError.textContent = "";
+        pagesError.className = "error"
+    } else {
+        pages.className = "invalid";
+        pagesError.textContent = "Pages must be an integer!";
+        pagesError.className = "error active"
+    }
+})
+
+
 // pressing submit button on form
 const form = document.querySelector("form");
 form.addEventListener("submit",(e)=>{
     e.preventDefault();
-    let titleForm = document.querySelector("#title").value;
-    let authorForm = document.querySelector("#author").value;
-    let pagesForm = document.querySelector("#pages").value;
-    let readForm = document.querySelector("#read").checked;
+    let titleForm = title.value;
+    let authorForm = author.value;
+    let pagesForm = pages.value;
+    let readForm = read.checked;
     
-    let bookExist=false;
-    myLibrary.forEach((book)=>{
-        if (titleForm.toLowerCase() === book.title.toLowerCase()){
-            alert("This book has already been added!");
-            bookExist=true;
-            return;
-        }
-    })
-    if (bookExist) {return};
+    let formValid = true
+    
+    if (titleForm.length <=0){
+        titleError.textContent = "Please enter a title";
+        titleError.className = "error active"
+        formValid = false
+    } 
+
+    if (authorForm.length <=0){
+        authorError.textContent = "Please enter an author";
+        authorError.className = "error active"
+        formValid = false
+    } 
+
+    if (pagesForm.length <=0){
+        pagesError.textContent = "Please enter the number of pages";
+        pagesError.className = "error active"
+        formValid = false
+    } 
+
+    if (!Number.isInteger(+pages.value)){
+        pagesError.textContent = "Pages must be an integer!";
+        pagesError.className = "error active"
+        formValid = false
+    }
+
+    if (formValid) {
+        myLibrary.forEach((book)=>{
+            if (titleForm.toLowerCase() === book.title.toLowerCase()){
+                titleError.textContent ="This book has already been added!";
+                titleError.className = "error active"
+                bookExist=true;
+                return;
+
+            }
+        })
+
+        newBook = new Book(titleForm,authorForm,pagesForm,readForm);
+        addBookToLibrary(newBook);
+        displayBooks();
+        form.reset();
+        popup.classList.remove("open-pop-up");
+
+    } else{
+        return
+    }
+
+    
 
 
-    newBook = new Book(titleForm,authorForm,pagesForm,readForm);
-    addBookToLibrary(newBook);
-    displayBooks();
-    form.reset();
-    popup.classList.remove("open-pop-up");
+
 })
-
-

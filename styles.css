@@ -132,6 +132,11 @@ button:active{
     width:100%;
     box-sizing: border-box
 }
+
+.pop-up input:focus.invalid {
+    outline: none;
+  }
+
 .pop-up input[id=read]{
 
     width: 1rem;
@@ -153,4 +158,21 @@ button:active{
     border-radius: 5px;
     background-color: #403e52;
     padding: 0.5rem 1rem
+}
+
+.invalid{
+    border: 1px solid red !important
+}
+
+.error{
+    margin-bottom: 3px;
+    border-radius: 5px;
+    display:block;
+    font-size: 0.7rem;
+    background-color: #fa7f7f;
+}
+
+.error.active{
+    padding:5px
+    
 }
